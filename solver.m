@@ -37,3 +37,31 @@ v4_ph = [double(magnitude), double((180/pi) * angle)]
 [angle, magnitude] = cart2pol(real(S.v5), imag(S.v5));
 v5 = S.v5
 v5_ph = [double(magnitude), double((180/pi) * angle)]
+
+
+% Functions
+
+function Z_series = series(Z)
+    Z_series = sum(Z, 'all');
+end
+
+function Z_parallel = parallel(Z)
+    Z_parallel = (sum(Z.^-1, 'all'))^-1;
+end
+
+function Z_capacitor = z_cap(C, w)
+    Z_capacitor = 1/(1i*w*C);
+end
+
+function Z_inductor = z_ind(L, w)
+    Z_inductor = (1i*w*L);
+end
+
+function [mag, theta] = phasor(abi)
+    mag = abs(abi);
+    theta = (180 / pi) * angle(abi);
+end
+
+function complex = algebraic(phasor)
+    complex = phasor(1) * exp(1i * phasor(2) * (pi / 180));
+end
